@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: mobile-store
+    env: node
+    buildCommand: npm run install:all && npm run build
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DATABASE_PATH
+        value: ./data/store.db
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
+

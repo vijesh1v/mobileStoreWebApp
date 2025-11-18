@@ -1,0 +1,9 @@
+Create a .env file in the server directory with the following content:
+
+PORT=5000
+JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+DATABASE_PATH=./data/store.db
+NODE_ENV=development
+
+Note: Change JWT_SECRET to a secure random string in production.
+
