@@ -281,5 +281,5 @@ insertMany(products);
 
 console.log(`Seeded ${products.length} products successfully!`);
 
-db.close();
+// Note: Database connection should remain open for server use
 
