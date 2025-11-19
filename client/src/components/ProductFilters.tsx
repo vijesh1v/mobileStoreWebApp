@@ -1,4 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+// Debounce utility function
+function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  wait: number
+): (...args: Parameters<T>) => void {
+  let timeout: NodeJS.Timeout;
+  return (...args: Parameters<T>) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+}
 
 interface Filters {
   brand: string;
@@ -41,16 +53,16 @@ export default function ProductFilters({
   const handlePlatformChange = (platform: string, checked: boolean) => {
     const currentPlatforms = localFilters.platform || [];
     let newPlatforms: string[];
-    
+
     if (checked) {
       newPlatforms = [...currentPlatforms, platform];
     } else {
       newPlatforms = currentPlatforms.filter(p => p !== platform);
     }
-    
+
     const newFilters = { ...localFilters, platform: newPlatforms };
     setLocalFilters(newFilters);
-    onFiltersChange(newFilters);
+    onFiltersChange(newFilters); // Platform changes are immediate, no debounce needed
   };
 
   const removePlatform = (platform: string) => {
