@@ -6,7 +6,7 @@ export function ensureDatabaseInitialized() {
   try {
     // Check if tables exist by trying to query the users table
     const tables = db.prepare(`
-      SELECT name FROM sqlite_master 
+      SELECT name FROM sqlite_master
       WHERE type='table' AND name IN ('users', 'products', 'cart_items', 'orders', 'order_items')
     `).all() as { name: string }[];
 
@@ -20,6 +20,18 @@ export function ensureDatabaseInitialized() {
       const schema = fs.readFileSync(schemaPath, 'utf-8');
       db.exec(schema);
       console.log('Database initialized successfully!');
+    }
+
+    // Check if products table is empty and seed if needed
+    const productCount = db.prepare('SELECT COUNT(*) as count FROM products').get() as { count: number };
+    if (productCount.count === 0) {
+      console.log('No products found. Seeding database...');
+      // Import and run seed
+      import('./seed').then(() => {
+        console.log('Database seeded successfully!');
+      }).catch((error) => {
+        console.error('Error seeding database:', error);
+      });
     }
   } catch (error: any) {
     console.error('Error checking/initializing database:', error.message);
