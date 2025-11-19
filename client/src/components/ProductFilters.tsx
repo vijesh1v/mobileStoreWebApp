@@ -171,25 +171,37 @@ export default function ProductFilters({
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Min Price
           </label>
-          <input
-            type="number"
-            placeholder="Min"
+          <select
             value={localFilters.minPrice}
             onChange={(e) => handleChange('minPrice', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
+          >
+            <option value="">Min Price</option>
+            <option value="100">100</option>
+            <option value="200">200</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+          </select>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Max Price
           </label>
-          <input
-            type="number"
-            placeholder="Max"
+          <select
             value={localFilters.maxPrice}
             onChange={(e) => handleChange('maxPrice', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-          />
+          >
+            <option value="">Max Price</option>
+            <option value="300">300</option>
+            <option value="400">400</option>
+            <option value="500">500</option>
+            <option value="600">600</option>
+            <option value="700">700</option>
+            <option value="800">800</option>
+            <option value="900">900</option>
+            <option value="1000">1000</option>
+          </select>
         </div>
       </div>
 
