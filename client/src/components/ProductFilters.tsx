@@ -1,16 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
-
-// Debounce utility function
-function debounce<T extends (...args: any[]) => any>(
-  func: T,
-  wait: number
-): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout;
-  return (...args: Parameters<T>) => {
-    clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
+import { useState, useEffect } from 'react';
 
 interface Filters {
   brand: string;
