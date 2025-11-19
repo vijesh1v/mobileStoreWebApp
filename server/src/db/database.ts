@@ -5,8 +5,15 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const dbPath = process.env.DATABASE_PATH || path.join(__dirname, '../../data/store.db');
+// Normalize DATABASE_PATH: if provided and relative, resolve against process.cwd()
+let dbPath = process.env.DATABASE_PATH || path.join(__dirname, '../../data/store.db');
+if (!path.isAbsolute(dbPath)) {
+  dbPath = path.resolve(process.cwd(), dbPath);
+}
 const dbDir = path.dirname(dbPath);
+
+// Helpful log to debug where the DB file is expected
+console.log(`Using database path: ${dbPath}`);
 
 // Ensure data directory exists
 if (!fs.existsSync(dbDir)) {
