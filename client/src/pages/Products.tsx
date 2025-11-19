@@ -30,7 +30,7 @@ interface Filters {
 }
 
 export default function Products() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
   const [filters, setFilters] = useState<Filters>({
     brand: '',
@@ -50,11 +50,7 @@ export default function Products() {
   const { addToCart } = useCart();
   const { user } = useAuth();
 
-  // Initialize search from URL params
-  useEffect(() => {
-    const searchParam = searchParams.get('search');
-    // Search is handled separately via URL, not in filters
-  }, [searchParams]);
+
 
   useEffect(() => {
     fetchProducts();

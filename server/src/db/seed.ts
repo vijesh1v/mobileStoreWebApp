@@ -261,7 +261,7 @@ const insertProduct = db.prepare(`
   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 `);
 
-const insertMany = db.transaction((products) => {
+const insertMany = db.transaction((products: any[]) => {
   for (const product of products) {
     insertProduct.run(
       product.name,
